@@ -3,6 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f3f6f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0c1517" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vittorio Stiletti · Tecnico reti e hardware">
+<meta property="og:description" content="Diplomato in Informatica e Telecomunicazioni (95/100). Disponibile da subito a Napoli.">
+<meta property="og:locale" content="it_IT">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e6b6f'/%3E%3Cpath d='M14 26a26 26 0 0 1 36 0M20 33a17 17 0 0 1 24 0M26 40a8 8 0 0 1 12 0' stroke='%23fff' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='47' r='4' fill='%23f0a347'/%3E%3C/svg%3E">
 <title>Vittorio Stiletti</title>
 <meta name="description" content="Vittorio Stiletti, diplomato in Informatica e Telecomunicazioni. Tecnico reti, hardware ed elettronica a Napoli.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +44,10 @@
   --zone-a:rgba(76,195,191,.18); --zone-b:rgba(240,163,71,.2); color-scheme:dark}
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+[hidden]{display:none!important}
+img{max-width:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+[id]{scroll-margin-top:calc(3.6rem + env(safe-area-inset-top,0px))}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:var(--s0);line-height:1.6;margin:0}
 a{color:var(--teal)}
 :focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:4px}
@@ -53,7 +63,7 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .sec-head p{color:var(--muted)}
 
 /* nav */
-.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;gap:1rem;height:3.2rem}
 .nav .brand{font-family:var(--f-display);font-weight:800;font-size:1.3rem;text-transform:uppercase;text-decoration:none;color:var(--ink);white-space:nowrap}
 .nav ul{display:flex;gap:1.1rem;list-style:none;margin:0 0 0 auto;padding:0;overflow-x:auto;scrollbar-width:none;min-width:0}
@@ -71,7 +81,8 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .cta{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.8rem}
 .btn{display:inline-flex;align-items:center;gap:.5rem;font:600 var(--s-1)/1 var(--f-body);padding:.8rem 1.1rem;border-radius:8px;text-decoration:none;border:1px solid var(--ink);color:var(--ink);background:transparent;cursor:pointer}
 .btn.primary{background:var(--ink);color:var(--bg)}
-.btn:hover{transform:translateY(-1px)}
+@media (hover:hover){.btn:hover{transform:translateY(-1px)}}
+.btn,.seg button,.filters button{min-height:44px;touch-action:manipulation}
 .photo{width:clamp(9rem,22vw,15rem);aspect-ratio:2/3;max-width:100%;object-fit:cover;border-radius:999px 999px 12px 12px;border:1px solid var(--line);background:var(--teal-soft)}
 .facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:clamp(2.5rem,6vw,4rem)}
 .facts div{background:var(--surface);padding:1rem 1.1rem;display:grid;gap:.2rem;min-width:0}
@@ -85,7 +96,9 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .seg button{font:600 var(--s-1) var(--f-body);padding:.5rem .95rem;background:transparent;border:0;color:var(--muted);cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
 .plan-box{overflow-x:auto}
-svg.plan{width:100%;min-width:540px;height:auto;display:block}
+svg.plan{width:100%;min-width:560px;height:auto;display:block}
+.plan-box{-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
+.swipe{display:none;font-size:.75rem;color:var(--muted);margin:.3rem 0 0}
 .plan .room{fill:none;stroke:var(--ink);stroke-width:3}
 .plan .wall{stroke:var(--ink);stroke-width:3}
 .plan .lbl{font:600 13px var(--f-mono);fill:var(--muted);text-transform:uppercase;letter-spacing:.06em}
@@ -104,7 +117,9 @@ svg.plan{width:100%;min-width:540px;height:auto;display:block}
 .plan .ghost{opacity:.18}
 .slider{display:grid;gap:.4rem;margin-top:.9rem}
 .slider label{font-size:var(--s-1);color:var(--muted)}
-input[type=range]{width:100%;accent-color:var(--teal)}
+input[type=range]{width:100%;accent-color:var(--teal);height:2.2rem;margin:0;cursor:pointer;touch-action:pan-y}
+.slider-row{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+.slider-row input{flex:1 1 12rem;min-width:0}
 .readout{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.9rem;align-items:center;margin-top:.9rem;padding-top:.9rem;border-top:1px solid var(--line)}
 .bars{display:flex;align-items:flex-end;gap:3px;height:28px}
 .bars i{width:7px;background:var(--line);border-radius:2px}
@@ -186,7 +201,7 @@ td:first-child{font-weight:600;width:38%}
 /* contatti */
 .contact{background:var(--ink);color:var(--bg);border-top:0}
 .contact h2{font-size:var(--s4);line-height:.9}
-.contact .sec-head p{color:color-mix(in srgb,var(--bg) 75%,var(--ink))}
+.contact .sec-head p{color:var(--bg);opacity:.8}
 .contact .eyebrow{color:var(--signal)}
 .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1rem}
 .ccard{border:1px solid color-mix(in srgb,var(--bg) 25%,var(--ink));border-radius:10px;padding:1.1rem;display:grid;gap:.5rem;min-width:0}
@@ -198,9 +213,41 @@ td:first-child{font-weight:600;width:38%}
 .toast{font-family:var(--f-mono);font-size:.75rem;color:var(--signal);min-height:1.1em}
 footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 60%,var(--ink));font-size:.75rem;padding-block:1.5rem}
 
+/* videochiamata: lo schermo della chiamata resta scuro in entrambi i temi, come una vera app */
+.side{display:grid;gap:1.25rem;min-width:0}
+.call-head{display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-bottom:.7rem}
+.qchip{font-family:var(--f-mono);font-size:.72rem;font-weight:600;padding:.2rem .55rem;border-radius:999px;color:var(--bg);background:var(--q,var(--ok));white-space:nowrap}
+.call{position:relative;aspect-ratio:16/9;max-width:100%;border-radius:10px;overflow:hidden;background:#0b1214;color:#f2f7f7;isolation:isolate}
+.call canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.call-top{position:absolute;left:.5rem;top:.5rem;right:.5rem;display:flex;align-items:center;gap:.4rem;font:600 .7rem/1.2 var(--f-mono);text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.call-top .rec{width:.45rem;height:.45rem;border-radius:50%;background:#ef4444;flex:none}
+.call-top .tm{margin-left:auto;font-variant-numeric:tabular-nums}
+.self{position:absolute;right:.5rem;bottom:.5rem;width:22%;aspect-ratio:4/3;border-radius:6px;background:#22343a;border:1px solid rgba(255,255,255,.25);display:grid;place-items:center;font:600 .7rem var(--f-mono);color:#cfe3e2}
+.call-warn{position:absolute;left:50%;bottom:.6rem;transform:translateX(-50%);font:600 .7rem var(--f-mono);background:rgba(194,65,12,.92);color:#fff;padding:.25rem .6rem;border-radius:999px;white-space:nowrap}
+.call-over{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:.6rem;background:rgba(5,10,12,.72);font:600 .8rem var(--f-mono);text-align:center;padding:1rem}
+.spin{width:1.8rem;height:1.8rem;border-radius:50%;border:3px solid rgba(255,255,255,.25);border-top-color:#fff;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.cstats{margin:.8rem 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.5rem}
+.cstats div{display:grid;gap:.1rem;min-width:0}
+.cstats dt{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.cstats dd{margin:0;font:600 .85rem var(--f-mono);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.call-msg{font-size:var(--s-1);color:var(--muted);margin-top:.6rem}
+
+/* schermi grandi: LIM, monitor 2K/4K */
+@media (min-width:1600px){html{font-size:112.5%}}
+@media (min-width:2200px){html{font-size:131.25%}}
+/* telefoni in orizzontale */
+@media (max-height:520px) and (orientation:landscape){.hero .photo{width:7rem}.hero{padding-block:1.5rem}}
+
 @media (max-width:860px){
+  .side{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
   .lab,.two,.compare,.skills,.beyond,.cards{grid-template-columns:minmax(0,1fr)}
   .steps,.fsl,.extra{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  .side{grid-template-columns:minmax(0,1fr)}
+  .swipe{display:block}
+  .cstats{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:560px){
   .hero{grid-template-columns:minmax(0,1fr)}
@@ -309,9 +356,13 @@ footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 60%,var(--ink));f
               </g>
             </svg>
           </div>
+          <p class="swipe">Scorri la pianta di lato per vedere tutta la casa.</p>
           <div class="slider">
             <label for="pos">Sposta lo smartphone da una stanza all'altra</label>
-            <input id="pos" type="range" min="40" max="760" value="640">
+            <div class="slider-row">
+              <input id="pos" type="range" min="40" max="760" value="640" aria-describedby="r1">
+              <button class="btn" id="tour" type="button">Fai il giro della casa</button>
+            </div>
           </div>
           <div class="readout" aria-live="polite">
             <div class="bars" id="bars"><i></i><i></i><i></i><i></i></div>
@@ -323,7 +374,26 @@ footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 60%,var(--ink));f
           <p class="note">Simulazione semplificata: i valori di segnale sono indicativi e servono a mostrare l'effetto della soluzione.</p>
         </div>
 
-        <aside class="panel cfg" id="cfg" aria-live="polite"></aside>
+        <div class="side">
+          <div class="panel">
+            <div class="call-head"><span class="eyebrow">Videochiamata in corso</span><span class="qchip" id="qchip">HD</span></div>
+            <div class="call">
+              <canvas id="cv" width="640" height="360" role="img" aria-label="Videochiamata simulata: la qualità dell'immagine segue il segnale Wi-Fi"></canvas>
+              <div class="call-top"><span class="rec" aria-hidden="true"></span><span>Colloquio · Responsabile HR</span><span class="tm" id="ctime">00:00</span></div>
+              <div class="self" aria-hidden="true">TU</div>
+              <div class="call-warn" id="cwarn" hidden>Connessione instabile</div>
+              <div class="call-over" id="cover" hidden><div class="spin" aria-hidden="true"></div><span>Connessione persa<br>Riconnessione in corso…</span></div>
+            </div>
+            <dl class="cstats">
+              <div><dt>Video</dt><dd id="s-res">1080p</dd></div>
+              <div><dt>Fotogrammi</dt><dd id="s-fps">30 fps</dd></div>
+              <div><dt>Ritardo</dt><dd id="s-lat">20 ms</dd></div>
+              <div><dt>Persi</dt><dd id="s-loss">0%</dd></div>
+            </dl>
+            <p class="call-msg" id="s-msg" aria-live="polite">Audio chiaro, immagine nitida.</p>
+          </div>
+          <aside class="panel cfg" id="cfg" aria-live="polite"></aside>
+        </div>
       </div>
 
       <div class="compare">
@@ -542,9 +612,9 @@ footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 60%,var(--ink));f
       rows:[["Ruolo","access point (bridge)"],["IP statico","192.168.1.2"],["DHCP",["disattivato","off"]],["Uplink","porta LAN, non WAN"],["SSID","CasaStiletti (uguale)"],["Password","uguale al router"]]}
   };
   let sel="ap";
-  function showCfg(n){
+  function showCfg(n,keep){
     if(!dopo && (n==="ap"||n==="plb"||n==="pla")) n="router";
-    sel=n;
+    if(keep!==false) sel=n;
     document.querySelectorAll(".node").forEach(g=>g.classList.toggle("sel",g.dataset.n===n));
     const c=CFG[n];
     $("#cfg").innerHTML='<span class="eyebrow">Configurazione</span><h3>'+c.t+'</h3><p>'+c.d+'</p><dl>'+
@@ -576,6 +646,10 @@ footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 60%,var(--ink));f
     $("#bars").querySelectorAll("i").forEach((el,i)=>el.classList.toggle("on",i<n));
     $("#r1").textContent=v+" dBm · in "+room(x)+" · connesso a "+(useAP?"access point":"router");
     $("#r2").textContent=txt;
+    setCall(n,col);
+    // sui telefoni la pianta scorre di lato: tienila centrata sullo smartphone
+    const box=$(".plan-box");
+    if(box.scrollWidth>box.clientWidth+2) box.scrollLeft=(x/800)*box.scrollWidth-box.clientWidth/2;
   }
   function setMode(m){
     dopo=m;
@@ -586,7 +660,7 @@ footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 60%,var(--ink));f
     $("#pl-line").classList.toggle("on",m);
     document.querySelectorAll('.node:not([data-n="router"])').forEach(g=>g.classList.toggle("ghost",!m));
     $("#pkt").style.display=m?"":"none";
-    showCfg(m?sel:"router");
+    showCfg(m?sel:"router",false);
     update();
   }
 
@@ -596,18 +670,126 @@ footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 60%,var(--ink));f
   for(let i=1;i<path.length;i++){const l=Math.hypot(path[i][0]-path[i-1][0],path[i][1]-path[i-1][1]);lens.push(l);total+=l}
   const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
   function at(t){let d=t*total;for(let i=0;i<lens.length;i++){if(d<=lens[i]){const k=d/lens[i];return [path[i][0]+(path[i+1][0]-path[i][0])*k,path[i][1]+(path[i+1][1]-path[i][1])*k]}d-=lens[i]}return path[path.length-1]}
-  function tick(ts){const t=((ts||0)/2600)%1;const [x,y]=at(t);const p=$("#pkt");p.setAttribute("cx",x);p.setAttribute("cy",y);if(!reduce)requestAnimationFrame(tick)}
-  tick(1300);
+  function movePkt(ts){const [x,y]=at(((ts||0)/2600)%1);const p=$("#pkt");p.setAttribute("cx",x);p.setAttribute("cy",y)}
+  movePkt(1300);
+
+  // ---- videochiamata simulata ----
+  const PROF=[
+    {res:"—",fps:0,lat:"—",loss:"100%",pix:16,freeze:1,chip:"Disconnesso",msg:"La chiamata si è interrotta: il segnale non basta."},
+    {res:"240p",fps:8,lat:190,loss:12,pix:11,freeze:.5,chip:"Scarsa",msg:"Immagine a quadretti, video che si blocca, audio a scatti."},
+    {res:"480p",fps:18,lat:85,loss:3,pix:5,freeze:.12,chip:"Media",msg:"Immagine sgranata e qualche rallentamento."},
+    {res:"720p",fps:30,lat:35,loss:.5,pix:2,freeze:0,chip:"HD",msg:"Audio chiaro, immagine buona."},
+    {res:"1080p",fps:30,lat:18,loss:0,pix:1,freeze:0,chip:"Full HD",msg:"Audio chiaro, immagine nitida."}
+  ];
+  const cv=$("#cv"), cx=cv.getContext("2d"), off=document.createElement("canvas"), ox=off.getContext("2d");
+  let lvl=4, lastFrame=0, frozenUntil=0, nextFreezeCheck=0, callStart=performance.now(), lastStats=0, drawn=false;
+  function setCall(n,col){
+    lvl=n;
+    const P=PROF[n];
+    $("#qchip").textContent=P.chip; $("#qchip").style.setProperty("--q",col);
+    $("#cover").hidden=n!==0; $("#cwarn").hidden=n!==1;
+    $("#s-msg").textContent=P.msg;
+    statsNow(); if(!running) frame(performance.now(),true);
+  }
+  function statsNow(){
+    const P=PROF[lvl];
+    $("#s-res").textContent=P.res;
+    $("#s-fps").textContent=P.fps?Math.max(1,Math.round(P.fps-(lvl<3?Math.random()*P.fps*.3:0)))+" fps":"0 fps";
+    $("#s-lat").textContent=typeof P.lat==="number"?Math.round(P.lat*(0.85+Math.random()*.3))+" ms":"—";
+    $("#s-loss").textContent=typeof P.loss==="number"?(P.loss?(P.loss*(0.8+Math.random()*.4)).toFixed(1):"0")+"%":P.loss;
+  }
+  function scene(g,t){
+    // stanza: parete, finestra, mensola
+    const bg=g.createLinearGradient(0,0,0,360); bg.addColorStop(0,"#3b5256"); bg.addColorStop(1,"#22343a");
+    g.fillStyle=bg; g.fillRect(0,0,640,360);
+    g.fillStyle="#9fd3d6"; g.fillRect(40,40,150,120); g.fillStyle="#d8f0f1"; g.fillRect(48,48,64,104); g.fillRect(118,48,64,104);
+    g.fillStyle="#5a4636"; g.fillRect(440,90,170,10);
+    g.fillStyle="#c9814a"; g.fillRect(455,62,22,28); g.fillStyle="#e7c27a"; g.fillRect(485,70,30,20);
+    g.fillStyle="#3f8f5b"; g.beginPath(); g.arc(575,72,18,0,7); g.fill(); g.fillStyle="#7a5a3a"; g.fillRect(565,80,20,10);
+    // persona
+    const bob=Math.sin(t/900)*4, tilt=Math.sin(t/1700)*.04;
+    g.save(); g.translate(320,250+bob); g.rotate(tilt);
+    g.fillStyle="#1f2f4d"; g.beginPath(); g.ellipse(0,110,150,95,0,Math.PI,0); g.fill();
+    g.fillStyle="#f4f4f4"; g.beginPath(); g.moveTo(-28,18); g.lineTo(0,60); g.lineTo(28,18); g.fill();
+    g.fillStyle="#c98f68"; g.fillRect(-20,-10,40,34);
+    g.fillStyle="#dba47e"; g.beginPath(); g.ellipse(0,-62,52,64,0,0,7); g.fill();
+    g.fillStyle="#2b2019"; g.beginPath(); g.ellipse(0,-100,56,34,0,Math.PI,0); g.fill(); g.fillRect(-56,-102,12,34); g.fillRect(44,-102,12,34);
+    const blink=(t%3800)<130;
+    g.fillStyle="#1d1712";
+    if(blink){g.fillRect(-26,-66,16,3);g.fillRect(10,-66,16,3)}else{g.beginPath();g.arc(-18,-64,5,0,7);g.arc(18,-64,5,0,7);g.fill()}
+    g.fillRect(-28,-80,20,4); g.fillRect(8,-80,20,4);
+    const talk=Math.max(0,Math.sin(t/110)*Math.sin(t/430))*12;
+    g.fillStyle="#7a3b33"; g.beginPath(); g.ellipse(0,-28,14,2+talk,0,0,7); g.fill();
+    g.restore();
+  }
+  function frame(now,force){
+    const P=PROF[lvl];
+    if(lvl===0){ if(!drawn||force){render(now);} return; }
+    if(!force){
+      if(now<frozenUntil) return;
+      if(now>nextFreezeCheck){ nextFreezeCheck=now+1000; if(Math.random()<P.freeze){frozenUntil=now+400+Math.random()*1400;return} }
+      if(now-lastFrame<1000/P.fps) return;
+    }
+    render(now);
+  }
+  function render(now){
+    const P=PROF[lvl], w=Math.ceil(640/P.pix), h=Math.ceil(360/P.pix);
+    if(off.width!==w){off.width=w;off.height=h}
+    ox.setTransform(w/640,0,0,h/360,0,0); scene(ox,now);
+    cx.imageSmoothingEnabled=P.pix<3; cx.drawImage(off,0,0,w,h,0,0,640,360);
+    if(lvl===0){cx.fillStyle="rgba(0,0,0,.35)";cx.fillRect(0,0,640,360)}
+    lastFrame=now; drawn=true;
+  }
+
+  // un solo ciclo di animazione, attivo solo quando la sezione è visibile
+  let running=false, visible=true;
+  function loop(ts){
+    if(!running) return;
+    if(!reduce && dopo) movePkt(ts);
+    frame(ts);
+    if(ts-lastStats>700){statsNow();lastStats=ts}
+    const s=Math.floor((ts-callStart)/1000); $("#ctime").textContent=String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+    if(touring) tourStep(ts);
+    requestAnimationFrame(loop);
+  }
+  function setRunning(){
+    const want=visible && !document.hidden && !reduce;
+    if(want&&!running){running=true;requestAnimationFrame(loop)} else if(!want) running=false;
+    if(reduce) frame(performance.now(),true);
+  }
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(es=>{visible=es[0].isIntersecting;setRunning()}).observe($("#capolavoro"));
+  }
+  document.addEventListener("visibilitychange",setRunning);
+
+  // giro automatico della casa
+  let touring=false, tourT0=0;
+  const TOUR_MS=12000;
+  function tourStep(ts){
+    if(!tourT0) tourT0=ts;
+    const k=(ts-tourT0)/TOUR_MS;
+    if(k>=1){stopTour();return}
+    const e=k<.5?k*2:2-k*2;              // andata e ritorno
+    $("#pos").value=Math.round(40+720*(e<.5?2*e*e:1-Math.pow(-2*e+2,2)/2));
+    update();
+  }
+  function stopTour(){touring=false;tourT0=0;$("#tour").textContent="Fai il giro della casa"}
+  $("#tour").addEventListener("click",()=>{
+    if(touring){stopTour();return}
+    if(reduce){ $("#pos").value=700; update(); return; }
+    touring=true; $("#tour").textContent="Ferma il giro"; setRunning();
+  });
 
   $("#btn-prima").addEventListener("click",()=>setMode(false));
   $("#btn-dopo").addEventListener("click",()=>setMode(true));
-  $("#pos").addEventListener("input",update);
+  $("#pos").addEventListener("input",()=>{ if(touring) stopTour(); update(); });
   document.querySelectorAll(".node").forEach(g=>{
     const go=()=>{if(!dopo&&g.dataset.n!=="router")setMode(true);showCfg(g.dataset.n)};
     g.addEventListener("click",go);
     g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}});
   });
   setMode(true);
+  setRunning();
 
   // skills filter
   document.querySelectorAll(".filters button").forEach(b=>b.addEventListener("click",()=>{
@@ -619,7 +801,7 @@ footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 60%,var(--ink));f
   // copy
   document.querySelectorAll("[data-copy]").forEach(b=>b.addEventListener("click",()=>{
     const el=document.getElementById(b.dataset.copy), t=$("#toast-"+b.dataset.copy);
-    const sel=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);t.textContent="Testo selezionato: premi Ctrl+C per copiarlo."};
+    const sel=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);t.textContent="Indirizzo selezionato: ora puoi copiarlo."};
     try{navigator.clipboard.writeText(el.textContent).then(()=>t.textContent="Indirizzo copiato.",sel)}catch(e){sel()}
   }));
 })();
