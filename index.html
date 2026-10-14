@@ -416,7 +416,7 @@ footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 60%,var(--ink));f
           <div class="panel">
             <div class="call-head"><span class="eyebrow">Videochiamata in corso</span><span class="qchip" id="qchip">HD</span></div>
             <div class="call">
-              <canvas id="cv" width="640" height="360" role="img" aria-label="Videochiamata simulata: la qualità dell'immagine segue il segnale Wi-Fi"></canvas>
+              <canvas id="call-canvas" width="640" height="360" role="img" aria-label="Videochiamata simulata: la qualità dell'immagine segue il segnale Wi-Fi"></canvas>
               <div class="call-top"><span class="rec" aria-hidden="true"></span><span>Colloquio · Responsabile HR</span><span class="tm" id="ctime">00:00</span></div>
               <div class="self" aria-hidden="true">TU</div>
               <div class="call-warn" id="cwarn" hidden>Connessione instabile</div>
@@ -775,7 +775,7 @@ footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 60%,var(--ink));f
     {res:"720p",fps:30,lat:35,loss:.5,pix:2,freeze:0,chip:"HD",msg:"Audio chiaro, immagine buona."},
     {res:"1080p",fps:30,lat:18,loss:0,pix:1,freeze:0,chip:"Full HD",msg:"Audio chiaro, immagine nitida."}
   ];
-  const cv=$("#cv"), cx=cv.getContext("2d"), off=document.createElement("canvas"), ox=off.getContext("2d");
+  const cv=$("#call-canvas"), cx=cv.getContext("2d"), off=document.createElement("canvas"), ox=off.getContext("2d");
   let lvl=4, lastFrame=0, frozenUntil=0, nextFreezeCheck=0, callStart=performance.now(), lastStats=0, drawn=false;
   function setCall(n,col){
     lvl=n;
