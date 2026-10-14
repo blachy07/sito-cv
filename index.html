@@ -241,6 +241,21 @@ footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 60%,var(--ink));f
 /* telefoni in orizzontale */
 @media (max-height:520px) and (orientation:landscape){.hero .photo{width:7rem}.hero{padding-block:1.5rem}}
 
+.ico{width:1.05em;height:1.05em;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.cv-card{margin-top:1rem;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1.2rem;align-items:center;border:1px solid var(--signal);border-radius:12px;padding:1.2rem;scroll-margin-top:calc(4.5rem + env(safe-area-inset-top,0px))}
+.cv-card b{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--signal);font-weight:600}
+.cv-txt{display:grid;gap:.35rem;min-width:0}
+.cv-txt .v{font-size:var(--s1)}
+.cv-txt span:last-child{opacity:.8;font-size:.93rem}
+.cv-actions{display:flex;flex-wrap:wrap;gap:.5rem}
+.cv-doc{position:relative;width:3.6rem;aspect-ratio:3/4;border-radius:4px;background:var(--bg);display:grid;align-content:start;gap:5px;padding:.6rem .5rem}
+.cv-doc i{display:block;height:3px;border-radius:2px;background:var(--ink);opacity:.35}
+.cv-doc i:nth-child(1){width:70%;opacity:.7}.cv-doc i:nth-child(3){width:85%}.cv-doc i:nth-child(5){width:60%}
+.cv-doc span{position:absolute;right:-.5rem;bottom:.4rem;font:600 .75rem var(--f-mono);background:var(--signal);color:var(--ink);padding:.1rem .35rem;border-radius:3px}
+.ccard .row .btn{gap:.4rem}
+@media (max-width:860px){.cv-card{grid-template-columns:auto minmax(0,1fr)}.cv-actions{grid-column:1/-1}}
+@media (max-width:560px){.cv-card{grid-template-columns:minmax(0,1fr)}.cv-doc{display:none}.cv-actions{display:grid;grid-template-columns:minmax(0,1fr)}.cv-actions .btn{justify-content:center}}
+
 /* menu a scomparsa per telefoni */
 .menu-btn{display:none;margin-left:auto;align-items:center;gap:.5rem;font:600 .875rem var(--f-body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:8px;padding:0 .8rem;min-height:44px;cursor:pointer}
 .bars3{display:grid;gap:4px;width:18px}.bars3 i{display:block;height:2px;background:currentColor;border-radius:1px;transition:transform .2s,opacity .2s}
@@ -333,6 +348,7 @@ footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 60%,var(--ink));f
       <li><a class="l" href="#competenze">Competenze</a></li>
       <li><a class="l" href="#oltre">Oltre la tecnica</a></li>
       <li><a class="l" href="#contatti">Contatti</a></li>
+      <li><a class="l" href="#cv">Scarica CV</a></li>
     </ul>
   </div>
 </nav>
@@ -346,6 +362,7 @@ footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 60%,var(--ink));f
         <p class="role">Diplomato in Informatica e Telecomunicazioni. Riparo PC, smartphone e schede elettroniche e configuro reti locali. Cerco un impiego a Napoli nelle telecomunicazioni, nelle reti o nell'elettronica. Disponibile a turni e trasferte.</p>
         <div class="cta">
           <a class="btn primary" href="#contatti">Contattami</a>
+          <a class="btn" href="#cv"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>Scarica il CV</a>
           <a class="btn" href="#capolavoro">Prova la simulazione Wi-Fi</a>
         </div>
       </div>
@@ -600,15 +617,32 @@ footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 60%,var(--ink));f
           <b>Email</b>
           <span class="v" id="mail">vittorio.stiletti2007.work@gmail.com</span>
           <div class="row">
-            <button class="btn primary" type="button" data-copy="mail">Copia indirizzo</button>
+            <button class="btn primary" type="button" data-copy="mail" data-ok="Indirizzo copiato.">Copia indirizzo</button>
             <a class="btn" href="mailto:vittorio.stiletti2007.work@gmail.com">Scrivi</a>
           </div>
           <span class="toast" id="toast-mail"></span>
         </div>
         <div class="ccard">
-          <b>Zona</b>
-          <span class="v">Napoli</span>
-          <span>Disponibile a turni e trasferte.</span>
+          <b>Telefono</b>
+          <span class="v" id="tel">+39 389 624 5786</span>
+          <div class="row">
+            <a class="btn primary" href="tel:+393896245786">Chiama</a>
+            <a class="btn" href="https://wa.me/393896245786" target="_blank" rel="noopener">WhatsApp</a>
+            <button class="btn" type="button" data-copy="tel" data-ok="Numero copiato.">Copia</button>
+          </div>
+          <span class="toast" id="toast-tel"></span>
+        </div>
+      </div>
+      <div class="cv-card" id="cv">
+        <div class="cv-doc" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><span>PDF</span></div>
+        <div class="cv-txt">
+          <b>Curriculum</b>
+          <span class="v">Il mio CV completo, in una pagina</span>
+          <span>Esperienze, competenze tecniche, progetto d'esame e formazione.</span>
+        </div>
+        <div class="row cv-actions">
+          <a class="btn primary" href="Curriculum_Vittorio_Stiletti.pdf" download="Curriculum_Vittorio_Stiletti.pdf"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>Scarica il CV (PDF)</a>
+          <a class="btn" href="Curriculum_Vittorio_Stiletti.pdf" target="_blank" rel="noopener">Apri nel browser</a>
         </div>
       </div>
     </div>
@@ -878,8 +912,8 @@ footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 60%,var(--ink));f
   // copy
   document.querySelectorAll("[data-copy]").forEach(b=>b.addEventListener("click",()=>{
     const el=document.getElementById(b.dataset.copy), t=$("#toast-"+b.dataset.copy);
-    const sel=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);t.textContent="Indirizzo selezionato: ora puoi copiarlo."};
-    try{navigator.clipboard.writeText(el.textContent).then(()=>t.textContent="Indirizzo copiato.",sel)}catch(e){sel()}
+    const sel=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);t.textContent="Testo selezionato: ora puoi copiarlo."};
+    try{navigator.clipboard.writeText(el.textContent).then(()=>t.textContent=b.dataset.ok||"Indirizzo copiato.",sel)}catch(e){sel()}
   }));
 })();
 </script>
